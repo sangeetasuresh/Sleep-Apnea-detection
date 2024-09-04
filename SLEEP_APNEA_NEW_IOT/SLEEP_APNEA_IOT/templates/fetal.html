@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="og:title" content="Sleep Apnea Prediction">
+  <meta name="author" content="Venkata Sreeram">
+  <meta name="og:image" content="static/logo1.png">
+  <meta name="Keywords" content="Flask, Machine Learning, Deep Learning, Artificial Intelligence, AI, ML,DL, Web Development">
+  <meta name="description" content="A Machine Learning and Deep Learning based webapp for Multiple Disease Prediction.">
+  <title>Sleep Apnea Prediction</title>
+  <link rel="icon" href="{{ url_for('static', filename = 'logo1.png') }}" type="image/icon type">
+  <p> Sleep Apnea Prediction </p>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  
+  <!-- <style>
+    html, body{ height:100%; margin:0; }
+header{ height:50px;}
+footer{ height:75px; background:black; }
+
+/* Trick */
+body{ 
+  display:flex; 
+  flex-direction:column; 
+}
+
+footer{
+  padding:10px;
+  margin-top:auto;
+  margin-bottom: auto; 
+}
+  </style> -->
+  <style>
+    body
+    {
+    background-image: url('https://img.freepik.com/premium-vector/emergency-ekg-monitoring-blue-glowing-neon-heart-pulse-heart-beat-electrocardiogram_322958-842.jpg'); 
+    background-size: 100% 100vh; 
+    background-repeat: no-repeat;
+    }
+  </style>
+
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark" style="background-color: black !important;">
+        <a style="text-decoration: none; color: white" href="{{ url_for('home') }}">Sleep Apnea Prediction</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+           <ul class="navbar-nav ml-auto">
+             <!-- <li class="nav-item active">
+               <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+             </li> -->
+             <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('fetalPage') }}">Sleep Apnea Prediction</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+              </li>
+           </ul>
+         </div>
+       </nav>
+
+       
+	<br>
+<br>
+<br>
+<br>
+<main>
+	<div class="container-fluid" style="margin-bottom: 10px;">
+<div class="row"  style="margin-bottom: 50px;">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="col-lg-12">
+            <center>
+              <img class="rounded-circle" src="https://cdn-icons-png.flaticon.com/512/6601/6601349.png" alt="Generic placeholder image" width="80" height="80">
+        </center>
+        <center><h1 style="color: aqua;">Sleep Apnea Prediction</h1></center> 
+        <center><h3 style="color: rgb(101, 211, 45);">Enter the Values</h3></center> 
+        <div class="card card-body" style="border: 1px solid black;">
+            <!-- \https://cdn-icons-png.flaticon.com/512/3359/3359081.png -->
+            <form class="form-horizontal" action="{{ url_for('predictPage') }}" method="POST">
+
+
+                <div class="row">
+                  <div class="col-md-1">
+                    <label
+                      for="Gender"
+                      style="text-transform: capitalize; font-weight: bold"
+                      >Name </label>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                        <input style="border: 1px solid black;" class="form-control" type="text" name="name" placeholder="name" required step="any">
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <label
+                      for="Gender"
+                      style="text-transform: capitalize; font-weight: bold"
+                      >Gender</label>
+                  </div>
+                  <div class="col-md-5">
+                      <select name="gender" id="gender" class="form-control">
+                          <option value="0">Male</option>
+                          <option value="1">Female</option>
+                        </select>
+                  </div>
+                      <!-- age,sex,height,Weight,qrs,q-t,t,diagnosis -->
+                      <div class="col-md-1">
+                        <label
+                          for="Gender"
+                          style="text-transform: capitalize; font-weight: bold"
+                          >Age</label>
+                      </div>
+                  <div class="col-md-2">
+                          <div class="form-group">
+                              <input style="border: 1px solid black;" class="form-control" type="number" name="age" placeholder="age" required step="any">
+                          </div>
+                  </div>
+                </div>
+
+
+                <div class="row">   
+                  <div class="col-md-1">
+                    <label
+                      for="Gender"
+                      style="text-transform: capitalize; font-weight: bold"
+                      >Sleep duration </label>
+                  </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input style="border: 1px solid black;" class="form-control" type="number" name="slp_d" required placeholder= "sleep duration" step="any">
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                      <label
+                        for="Gender"
+                        style="text-transform: capitalize; font-weight: bold"
+                        >Quality of Sleep </label>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input style="border: 1px solid black;" class="form-control" type="number" name="qos" required placeholder="Quality of Sleep"  step="any">
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                      <label
+                        for="Gender"
+                        style="text-transform: capitalize; font-weight: bold"
+                        >Physical Activity Level </label>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                          <input style="border: 1px solid black;" class="form-control" type="number" name="pal" required placeholder="Physical Activity Level (in %)"  step="any">
+                      </div>
+                  </div>
+                    
+                </div>
+                <div class="row">
+                  <div class="col-md-1">
+                    <label
+                      for="Gender"
+                      style="text-transform: capitalize; font-weight: bold"
+                      >Stress Level</label>
+                  </div>
+                  <div class="col-md-5">
+                      <select name="sl" id="sl" class="form-control">
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                        </select>
+                  </div>
+
+                     <div class="col-md-1">
+                    <label
+                      for="Gender"
+                      style="text-transform: capitalize; font-weight: bold"
+                      >BMI</label>
+                  </div>
+                  <div class="col-md-5">
+                      <select name="bmi" id="bmi" class="form-control">
+                          <option value="0">Under Weight</option>
+                          <option value="1">Normal</option>
+                          <option value="2">Over Weight</option>
+                        </select>
+                  </div>
+                  <div class="col-md-1">
+                    <label
+                      for="Gender"
+                      style="text-transform: capitalize; font-weight: bold"
+                      >BPM</label>
+                  </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input style="border: 1px solid black;" class="form-control" type="number" name="hr"  required placeholder="Heart Rate" step="any" value="{{bpm}}">
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                      <label
+                        for="Gender"
+                        style="text-transform: capitalize; font-weight: bold"
+                        >Daily steps</label>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="form-group">
+                          <input style="border: 1px solid black;" class="form-control" type="number" name="ds"  required placeholder="Daily Steps" step="any">
+                      </div>
+                  </div>
+                    
+                </div>
+                <div class="row">
+                  <div class="col-md-1">
+                    <label
+                      for="Gender"
+                      style="text-transform: capitalize; font-weight: bold"
+                      >ECG</label>
+                  </div>
+                  <div class="col-md-5">
+                      <div class="form-group">
+                          <input style="border: 1px solid black;" class="form-control" type="number" name="ecg"  required placeholder="ECG Value" step="any" value="{{ecg}}" >
+                      </div>
+                  </div>
+                  <div class="col-md-1">
+                    <label
+                      for="Gender"
+                      style="text-transform: capitalize; font-weight: bold"
+                      >SPO2</label>
+                  </div>
+                  <div class="col-md-5">
+                      <div class="form-group">
+                          <input style="border: 1px solid black;" class="form-control" type="number" name="spo2"  required placeholder="spo2" step="any" value="{{spo2}}" >
+                      </div>
+                  </div>
+                  
+              </div>
+                
+                <input type="submit" class="btn btn-info btn-block" value="Predict" required step="any">
+            </form>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div> 
+
+</main>
+</body>
+</html>
